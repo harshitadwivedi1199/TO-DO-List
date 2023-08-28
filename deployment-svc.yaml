@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       -  name: myweb
-         image: harc1199/to-do-list:${BUILD_TAG}
+         image: harc1199/to-do-list:jenkins-Task-manager-project-28
          ports:
          - containerPort: 5000
 # Service
