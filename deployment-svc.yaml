@@ -1,0 +1,36 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myweb-deploy
+  labels:
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: prod
+  template:
+    metadata:
+      labels:
+        env: prod
+    spec:
+      containers:
+      -  name: myweb
+         image: harc1199/to-do-list:${BUILD_TAG}
+         ports:
+         - containerPort: 5000
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  selector:
+    env: prod
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30008
